@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Contexts;
 using Infrastructure.Email;
 using Infrastructure.Interceptors;
+using Infrastructure.QueueMessaging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,13 +12,16 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddSingleton<IEmailService, AzureEmailService>();
+        services.AddSingleton<IQueueMessagingService, QueueMessagingService>();
+
+        services.AddDbContext<ApplicationDbContext>((provider, options) =>
         {
             options.UseSqlServer(configuration.GetConnectionString("Database"));
-            options.AddInterceptors(new ApplicationSaveChangesInterceptor());
-        });
 
-        services.AddSingleton<IEmailService, AzureEmailService>();
+            var queueMessagingService = provider.GetRequiredService<IQueueMessagingService>();
+            options.AddInterceptors(new ApplicationSaveChangesInterceptor(queueMessagingService));
+        });
 
         return services;
     }

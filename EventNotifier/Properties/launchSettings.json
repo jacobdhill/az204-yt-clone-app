@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "EventNotifier": {
-      "commandName": "Project",
-      "commandLineArgs": "--port 7170"
-    }
-  }
-}

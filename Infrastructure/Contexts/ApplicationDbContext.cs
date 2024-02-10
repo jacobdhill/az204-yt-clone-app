@@ -1,5 +1,4 @@
 ﻿using Domain.EmailTemplates;
-using Domain.EventNotifications;
 using Domain.Reminders;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +20,5 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Reminder> Reminders { get; set; }
-    public DbSet<EventNotification> EventNotifications { get; set; }
     public DbSet<EmailTemplate> EmailTemplates { get; set; }
 }

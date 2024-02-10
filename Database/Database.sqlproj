@@ -63,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Reminder.sql" />
-    <Build Include="dbo\Tables\EventNotification.sql" />
     <Build Include="dbo\Tables\EmailTemplate.sql" />
   </ItemGroup>
   <ItemGroup>

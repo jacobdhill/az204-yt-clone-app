@@ -1,8 +1,7 @@
 ﻿using Domain;
-using Domain.EventNotifications;
+using Infrastructure.QueueMessaging;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +10,13 @@ namespace Infrastructure.Interceptors;
 
 public class ApplicationSaveChangesInterceptor : SaveChangesInterceptor
 {
+    private readonly IQueueMessagingService _queueMessagingService;
+
+    public ApplicationSaveChangesInterceptor(IQueueMessagingService queueMessagingService)
+    {
+        _queueMessagingService = queueMessagingService;
+    }
+
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
     {
         if (eventData.Context == null)
@@ -21,19 +27,13 @@ public class ApplicationSaveChangesInterceptor : SaveChangesInterceptor
         var domainEvents = eventData.Context.ChangeTracker
             .Entries<IDomainEntity>()
             .SelectMany(domainEntity => domainEntity.Entity.DomainEvents)
-            .Select(domainEvent => new EventNotification()
+            .Select(domainEvent => JsonConvert.SerializeObject(domainEvent, new JsonSerializerSettings()
             {
-                EventNotificationId = new EventNotificationId(Guid.NewGuid()),
-                DomainEventPayload = JsonConvert.SerializeObject(domainEvent, new JsonSerializerSettings()
-                {
-                    TypeNameHandling = TypeNameHandling.All
-                }),
-                IsProcessed = false,
-                CreatedDate = DateTime.UtcNow
-            })
+                TypeNameHandling = TypeNameHandling.All
+            }))
             .ToList();
 
-        eventData.Context.AddRange(domainEvents);
+        _queueMessagingService.QueueDomainEvents(domainEvents);
 
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }
