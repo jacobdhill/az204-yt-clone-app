@@ -1,4 +1,5 @@
 using Application;
+using Azure.Identity;
 using Infrastructure;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
 builder.Configuration
     .AddUserSecrets(assembly)
-    .AddAzureAppConfiguration(builder.Configuration.GetConnectionString("AppConfiguration"));
+    .AddAzureAppConfiguration(options =>
+    {
+        options.Connect(builder.Configuration.GetConnectionString("AppConfiguration"));
+        options.ConfigureKeyVault(kv => kv.SetCredential(new DefaultAzureCredential()));
+    });
 #endregion
 
 #region Logging

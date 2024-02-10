@@ -1,4 +1,4 @@
-﻿namespace Function
+﻿namespace EventNotifier
 {
     public class TimerInfo
     {

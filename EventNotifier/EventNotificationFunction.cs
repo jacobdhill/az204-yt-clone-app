@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Function
+namespace EventNotifier
 {
     public class EventNotificationFunction
     {
@@ -37,7 +37,7 @@ namespace Function
 
             foreach (var eventNotification in eventNotifications)
             {
-                var domainEvent = JsonConvert.DeserializeObject(eventNotification.DomainEvent, new JsonSerializerSettings()
+                var domainEvent = JsonConvert.DeserializeObject(eventNotification.DomainEventPayload, new JsonSerializerSettings()
                 {
                     TypeNameHandling = TypeNameHandling.All
                 });

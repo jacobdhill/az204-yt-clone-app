@@ -24,7 +24,7 @@ public class ApplicationSaveChangesInterceptor : SaveChangesInterceptor
             .Select(domainEvent => new EventNotification()
             {
                 EventNotificationId = new EventNotificationId(Guid.NewGuid()),
-                DomainEvent = JsonConvert.SerializeObject(domainEvent, new JsonSerializerSettings()
+                DomainEventPayload = JsonConvert.SerializeObject(domainEvent, new JsonSerializerSettings()
                 {
                     TypeNameHandling = TypeNameHandling.All
                 }),
@@ -34,7 +34,6 @@ public class ApplicationSaveChangesInterceptor : SaveChangesInterceptor
             .ToList();
 
         eventData.Context.AddRange(domainEvents);
-        eventData.Context.SaveChanges();
 
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }

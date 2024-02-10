@@ -13,7 +13,7 @@ public static class DependencyInjection
     {
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection"));
+            options.UseSqlServer(configuration.GetConnectionString("Database"));
             options.AddInterceptors(new ApplicationSaveChangesInterceptor());
         });
 

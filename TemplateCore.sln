@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{11F5AA2E-6EDB-4CA3-AAE9-0A6F71EBF906}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Function", "EventNotifier\Function.csproj", "{89D8FDA2-F549-4EA9-AC75-468960533FF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventNotifier", "EventNotifier\EventNotifier.csproj", "{89D8FDA2-F549-4EA9-AC75-468960533FF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
