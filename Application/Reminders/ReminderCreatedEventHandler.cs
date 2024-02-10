@@ -1,4 +1,4 @@
-﻿using Domain;
+﻿using Domain.EmailTemplates;
 using Domain.Reminders;
 using Infrastructure.Contexts;
 using Infrastructure.Email;

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace EventNotifier
+namespace Function
 {
     public class EventNotificationFunction
     {
@@ -16,9 +16,9 @@ namespace EventNotifier
         private readonly ISender _sender;
 
         public EventNotificationFunction(
-            ILoggerFactory loggerFactory, 
-            IConfiguration configuration, 
-            ApplicationDbContext context, 
+            ILoggerFactory loggerFactory,
+            IConfiguration configuration,
+            ApplicationDbContext context,
             ISender sender)
         {
             _logger = loggerFactory.CreateLogger<EventNotificationFunction>();

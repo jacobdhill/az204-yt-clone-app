@@ -4,7 +4,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Reminders.Create;
+namespace Application.Reminders.Delete;
 
 public class DeleteReminderCommandHandler : IRequestHandler<DeleteReminderCommand>
 {

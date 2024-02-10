@@ -1,7 +1,7 @@
 ﻿using Domain.Reminders;
 using MediatR;
 
-namespace Application.Reminders.Create;
+namespace Application.Reminders.Update;
 
 public class UpdateReminderCommand : IRequest
 {

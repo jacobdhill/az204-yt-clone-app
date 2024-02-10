@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Reminders.Create;
+namespace Application.Reminders.Update;
 
 public class UpdateReminderCommandHandler : IRequestHandler<UpdateReminderCommand>
 {

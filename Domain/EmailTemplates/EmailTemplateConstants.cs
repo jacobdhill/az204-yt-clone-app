@@ -1,4 +1,4 @@
-﻿namespace Domain;
+﻿namespace Domain.EmailTemplates;
 
 public static class EmailTemplateConstants
 {

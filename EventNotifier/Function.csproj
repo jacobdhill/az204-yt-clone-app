@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UserSecretsId>e7b84fb4-46a0-4825-a3ea-dfa341acfdff</UserSecretsId>
-    <PublishProfile>$(MSBuildProjectDirectory)\EventNotifier\Properties\PublishProfiles</PublishProfile>
+    <PublishProfile>$(MSBuildProjectDirectory)\Function\Properties\PublishProfiles</PublishProfile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.10.0" />
