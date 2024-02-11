@@ -6,9 +6,15 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <InvariantGlobalization>false</InvariantGlobalization>
     <UserSecretsId>a84eb4b5-3d5e-4610-95eb-9ddb0e36d76b</UserSecretsId>
+	<SpaRoot>..\webapp.client</SpaRoot>
+	<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
+	<SpaProxyServerUrl>https://localhost:4200</SpaProxyServerUrl>
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.SpaProxy">
+	  <Version>8.*-*</Version>
+	</PackageReference>
     <PackageReference Include="Azure.Identity" Version="1.10.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="6.0.0" />
     <PackageReference Include="Serilog" Version="3.1.1" />
@@ -20,6 +26,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+	<ProjectReference Include="..\webapp.client\WebClient.esproj">
+	  <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+	</ProjectReference>
   </ItemGroup>
 
 </Project>

@@ -17,6 +17,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Databa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Function", "Function\Function.csproj", "{9312C606-890A-4BD3-BBB8-5119820D0E6D}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "WebClient", "webapp.client\WebClient.esproj", "{99965B6C-2F26-4952-B317-73567DF68947}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,12 @@ Global
 		{9312C606-890A-4BD3-BBB8-5119820D0E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9312C606-890A-4BD3-BBB8-5119820D0E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9312C606-890A-4BD3-BBB8-5119820D0E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99965B6C-2F26-4952-B317-73567DF68947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99965B6C-2F26-4952-B317-73567DF68947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99965B6C-2F26-4952-B317-73567DF68947}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{99965B6C-2F26-4952-B317-73567DF68947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99965B6C-2F26-4952-B317-73567DF68947}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99965B6C-2F26-4952-B317-73567DF68947}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +68,7 @@ Global
 		{AB8BA6AD-BF19-480D-890E-1FE68222D071} = {5D98E119-7289-42DD-A481-4047EB66FEFE}
 		{11F5AA2E-6EDB-4CA3-AAE9-0A6F71EBF906} = {5D98E119-7289-42DD-A481-4047EB66FEFE}
 		{9312C606-890A-4BD3-BBB8-5119820D0E6D} = {5D98E119-7289-42DD-A481-4047EB66FEFE}
+		{99965B6C-2F26-4952-B317-73567DF68947} = {5D98E119-7289-42DD-A481-4047EB66FEFE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {262E563B-21B2-4DE1-8F58-89A5C367BF5C}

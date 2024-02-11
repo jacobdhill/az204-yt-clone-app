@@ -54,6 +54,29 @@ public class ReminderController : Controller
         }
     }
 
+    [HttpGet("{reminderId:guid}")]
+    public async Task<IResult> Get(Guid reminderId)
+    {
+        try
+        {
+            var query = new GetReminderQuery()
+            {
+                ReminderId = new ReminderId(reminderId)
+            };
+            var result = await _sender.Send(query);
+
+            return Results.Ok(result);
+        }
+        catch (ReminderNotFoundException e)
+        {
+            return Results.NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return Results.Problem(e.Message);
+        }
+    }
+
     [HttpPut("{reminderId:guid}")]
     public async Task<IResult> Update(Guid reminderId, [FromBody] UpdateReminderCommand command)
     {

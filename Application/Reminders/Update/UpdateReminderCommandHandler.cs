@@ -26,14 +26,16 @@ public class UpdateReminderCommandHandler : IRequestHandler<UpdateReminderComman
 
         var reminderUpdatedEvent = new ReminderUpdatedEvent()
         {
+            Description = request.Description,
             OldDayOfMonth = reminder.DayOfMonth,
             OldNotifyDaysBefore = reminder.NotifyDaysBefore,
-            DayOfMonth = request.NotifyDaysBefore,
+            DayOfMonth = request.DayOfMonth,
             NotifyDaysBefore = request.NotifyDaysBefore
         };
 
         reminder.DomainEvents.Add(reminderUpdatedEvent);
 
+        reminder.Description = request.Description;
         reminder.DayOfMonth = request.DayOfMonth;
         reminder.NotifyDaysBefore = request.NotifyDaysBefore;
         reminder.ModifiedDate = DateTime.UtcNow;
