@@ -1,5 +1,4 @@
 ﻿using Domain;
-using Infrastructure.QueueMessaging;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json;
 using System.Linq;
@@ -10,13 +9,6 @@ namespace Infrastructure.Interceptors;
 
 public class ApplicationSaveChangesInterceptor : SaveChangesInterceptor
 {
-    private readonly IQueueMessagingService _queueMessagingService;
-
-    public ApplicationSaveChangesInterceptor(IQueueMessagingService queueMessagingService)
-    {
-        _queueMessagingService = queueMessagingService;
-    }
-
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
     {
         if (eventData.Context == null)
@@ -33,7 +25,9 @@ public class ApplicationSaveChangesInterceptor : SaveChangesInterceptor
             }))
             .ToList();
 
-        _queueMessagingService.QueueDomainEvents(domainEvents);
+        //
+        // TODO: Handle Domain Events
+        //
 
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }

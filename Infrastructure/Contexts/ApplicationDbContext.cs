@@ -1,5 +1,4 @@
-﻿using Domain.EmailTemplates;
-using Domain.Reminders;
+﻿using Domain.Videos;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contexts;
@@ -19,6 +18,5 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 
-    public DbSet<Reminder> Reminders { get; set; }
-    public DbSet<EmailTemplate> EmailTemplates { get; set; }
+    public DbSet<Video> Videos { get; set; }
 }
