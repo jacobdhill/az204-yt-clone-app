@@ -2,7 +2,6 @@
 using Infrastructure.Contexts;
 using Infrastructure.Storage;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using System.Threading;
@@ -14,16 +13,11 @@ public class CreateVideoCommandHandler : IRequestHandler<CreateVideoCommand, Gui
 {
     private readonly StorageService _storageService;
     private readonly ApplicationDbContext _dbContext;
-    private readonly IConfiguration _configuration;
 
-    public CreateVideoCommandHandler(
-        ApplicationDbContext dbContext,
-        StorageService storageService,
-        IConfiguration configuration)
+    public CreateVideoCommandHandler(ApplicationDbContext dbContext, StorageService storageService)
     {
         _dbContext = dbContext;
         _storageService = storageService;
-        _configuration = configuration;
     }
 
     public async Task<Guid> Handle(CreateVideoCommand request, CancellationToken cancellationToken)
@@ -38,7 +32,8 @@ public class CreateVideoCommandHandler : IRequestHandler<CreateVideoCommand, Gui
             Id = Guid.NewGuid(),
             Title = request.Title,
             Description = request.Description,
-            Tags = request.Tags
+            Tags = request.Tags,
+            CreatedDateUtc = DateTime.UtcNow
         };
 
         var fileInfo = new FileInfo(request.File.FileName);

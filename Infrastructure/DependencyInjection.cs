@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Contexts;
 using Infrastructure.Interceptors;
 using Infrastructure.Notifications;
+using Infrastructure.Search;
 using Infrastructure.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,7 @@ public static class DependencyInjection
     {
         services.AddSingleton<NotificationService>();
         services.AddSingleton<StorageService>();
+        services.AddSingleton<SearchService>();
 
         services.AddDbContext<ApplicationDbContext>((provider, options) =>
         {

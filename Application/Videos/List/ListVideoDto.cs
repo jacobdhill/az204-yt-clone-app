@@ -11,6 +11,7 @@ public class ListVideoDto
     public string Description { get; set; }
     public List<string> Tags { get; set; }
     public string ThumbnailUrl { get; set; }
+    public DateTime CreatedDateUtc { get; set; }
 
     public static ListVideoDto Create(Video video)
     {
@@ -20,7 +21,8 @@ public class ListVideoDto
             Title = video.Title,
             Description = video.Description,
             Tags = video.Tags,
-            ThumbnailUrl = video.ThumbnailUrl
+            ThumbnailUrl = video.ThumbnailUrl,
+            CreatedDateUtc = video.CreatedDateUtc
         };
     }
 }

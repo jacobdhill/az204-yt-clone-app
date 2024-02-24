@@ -19,5 +19,8 @@ public class VideoConfiguration : IEntityTypeConfiguration<Video>
             .Property(m => m.Id)
             .ToJsonProperty("id")
             .ValueGeneratedOnAdd();
+
+        builder
+            .HasQueryFilter(v => v.IsDeleted == false);
     }
 }

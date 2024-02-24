@@ -11,6 +11,7 @@ public class ReadVideoDto
     public string Description { get; set; }
     public List<string> Tags { get; set; }
     public string SourceUrl { get; set; }
+    public DateTime CreatedDateUtc { get; set; }
 
     public static ReadVideoDto Create(Video video)
     {
@@ -20,7 +21,8 @@ public class ReadVideoDto
             Title = video.Title,
             Description = video.Description,
             Tags = video.Tags,
-            SourceUrl = video.SourceUrl
+            SourceUrl = video.SourceUrl,
+            CreatedDateUtc = video.CreatedDateUtc
         };
     }
 }
