@@ -45,6 +45,7 @@ public class VideoController : Controller
 
 
     [HttpPost("upload")]
+    [RequestSizeLimit(128 * 1024 * 1024)]
     public async Task<IResult> Upload([FromForm] UploadVideoCommand command)
     {
         try

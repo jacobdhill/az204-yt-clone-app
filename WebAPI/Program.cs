@@ -28,7 +28,7 @@ var telemetryConfiguration = new TelemetryConfiguration()
 
 var logger = new LoggerConfiguration()
     .WriteTo.Console()
-    .WriteTo.ApplicationInsights(telemetryConfiguration, TelemetryConverter.Traces)
+    //.WriteTo.ApplicationInsights(telemetryConfiguration, TelemetryConverter.Traces)
     .CreateLogger();
 
 builder.Services.AddSerilog(logger);

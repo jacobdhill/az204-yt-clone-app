@@ -33,8 +33,7 @@ public class ApplicationSaveChangesInterceptor : SaveChangesInterceptor
             }))
             .ToList();
 
-        // TODO: wire up notifications
-        //await _notificationService.SendMessagesAsync(domainEvents);
+        await _notificationService.SendMessagesAsync(domainEvents);
 
         return await base.SavingChangesAsync(eventData, result, cancellationToken);
     }

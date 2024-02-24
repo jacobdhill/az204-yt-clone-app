@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Application.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -12,6 +13,9 @@ public static class DependencyInjection
 
         services.AddMediatR(configuration =>
             configuration.RegisterServicesFromAssemblies(assembly));
+
+        services.AddSingleton<EventNotifierService>();
+        services.AddHostedService(sp => sp.GetRequiredService<EventNotifierService>());
 
         return services;
     }

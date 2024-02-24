@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Cache;
 using Infrastructure.Contexts;
+using Infrastructure.Email;
 using Infrastructure.Interceptors;
 using Infrastructure.Notifications;
 using Infrastructure.Search;
@@ -18,6 +19,7 @@ public static class DependencyInjection
         services.AddSingleton<StorageService>();
         services.AddSingleton<SearchService>();
         services.AddSingleton<CacheService>();
+        services.AddSingleton<IEmailService, AzureEmailService>();
 
         services.AddDbContext<ApplicationDbContext>((provider, options) =>
         {

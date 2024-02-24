@@ -1,6 +1,8 @@
 ﻿using Azure.Storage.Queues;
+using Azure.Storage.Queues.Models;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Notifications;
@@ -23,6 +25,20 @@ public class NotificationService
         foreach (var notification in notifications)
         {
             await _client.SendMessageAsync(notification);
+        }
+    }
+
+    public List<QueueMessage> ReceiveMessages()
+    {
+        var messages = _client.ReceiveMessages();
+        return messages.Value.ToList();
+    }
+
+    public void RemoveMessages(List<QueueMessage> messages)
+    {
+        foreach (var message in messages)
+        {
+            _client.DeleteMessage(message.MessageId, message.PopReceipt);
         }
     }
 }

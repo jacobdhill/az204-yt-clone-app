@@ -1,5 +1,7 @@
-﻿namespace Domain;
+﻿using MediatR;
 
-public class DomainEvent
+namespace Domain;
+
+public class DomainEvent : IRequest
 {
 }
