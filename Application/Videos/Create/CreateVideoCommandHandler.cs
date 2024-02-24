@@ -28,9 +28,9 @@ public class CreateVideoCommandHandler : IRequestHandler<CreateVideoCommand, Gui
 
     public async Task<Guid> Handle(CreateVideoCommand request, CancellationToken cancellationToken)
     {
-        if (request.File is null || request.File.Length == 0)
+        if (File.Exists(request.FileName) == false)
         {
-            throw new VideoFileInvalidException();
+            throw new VideoFileNotFoundException(request.FileName);
         }
 
         var video = new Video()
@@ -42,12 +42,13 @@ public class CreateVideoCommandHandler : IRequestHandler<CreateVideoCommand, Gui
             CreatedDateUtc = DateTime.UtcNow
         };
 
-        var fileInfo = new FileInfo(request.File.FileName);
-        var fileName = video.Id + fileInfo.Extension;
-        using (var stream = request.File.OpenReadStream())
+        var fileName = video.Id + ".mp4";
+        using (var stream = new FileStream(request.FileName, FileMode.Open))
         {
             await _storageService.UploadFileToStorageAsync(stream, fileName, cancellationToken);
         }
+
+        File.Delete(request.FileName);
 
         var videoCreatedEvent = new VideoCreatedEvent()
         {

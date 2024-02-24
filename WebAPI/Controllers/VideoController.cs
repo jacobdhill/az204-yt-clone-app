@@ -1,6 +1,7 @@
 using Application.Videos.Create;
 using Application.Videos.List;
 using Application.Videos.Read;
+using Application.Videos.Upload;
 using Domain.Videos;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -24,13 +25,33 @@ public class VideoController : Controller
     }
 
     [HttpPost]
-    public async Task<IResult> Create([FromForm] CreateVideoCommand command)
+    public async Task<IResult> Create([FromBody] CreateVideoCommand command)
     {
         try
         {
             var videoId = await _sender.Send(command);
 
             return Results.Ok(videoId);
+        }
+        catch (VideoFileNotFoundException e)
+        {
+            return Results.BadRequest(e.Message);
+        }
+        catch (Exception e)
+        {
+            return Results.Problem(e.Message);
+        }
+    }
+
+
+    [HttpPost("upload")]
+    public async Task<IResult> Upload([FromForm] UploadVideoCommand command)
+    {
+        try
+        {
+            var fileName = await _sender.Send(command);
+
+            return Results.Ok(fileName);
         }
         catch (VideoFileInvalidException e)
         {

@@ -26,6 +26,7 @@ public class ListVideoQueryHandler : IRequestHandler<ListVideoQuery, List<ListVi
         var videos = await _cache.GetOrSetAsync(
             CacheKeys.Videos.List(),
             () => _dbContext.Videos
+                .OrderBy(video => video.Title)
                 .Select(video => ListVideoDto.Create(video))
                 .ToListAsync(cancellationToken),
             TimeSpan.FromSeconds(30));
