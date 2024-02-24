@@ -1,0 +1,24 @@
+.video.placeholder {
+  aspect-ratio: 16/9;
+  width: 100%;
+  background-color: #ddd;
+  color: #999;
+}
+
+.thumbnail-container {
+  width: 160px;
+}
+
+.thumbnail {
+  height: 90px;
+}
+
+.video {
+  max-height: 100%;
+}
+
+.video-container,
+.thumbnail-container {
+  aspect-ratio: 16/9;
+  background-color: black;
+}

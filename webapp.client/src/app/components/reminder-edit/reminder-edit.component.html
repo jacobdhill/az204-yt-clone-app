@@ -1,6 +1,0 @@
-<form [formGroup]="reminderGroup">
-  <input type="text" formControlName="description" placeholder="description">
-  <input type="number" formControlName="dayOfMonth" placeholder="day of month">
-  <input type="number" formControlName="notifyDaysBefore" placeholder="notify days before">
-  <button [disabled]="reminderGroup.invalid" (click)="editReminder()">save</button>
-</form>

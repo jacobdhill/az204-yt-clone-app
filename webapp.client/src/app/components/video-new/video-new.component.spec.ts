@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReminderListComponent } from './reminder-list.component';
+import { VideoNewComponent } from './video-new.component';
 
-describe('ReminderListComponent', () => {
-  let component: ReminderListComponent;
-  let fixture: ComponentFixture<ReminderListComponent>;
+describe('VideoNewComponent', () => {
+  let component: VideoNewComponent;
+  let fixture: ComponentFixture<VideoNewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ReminderListComponent]
+      declarations: [VideoNewComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ReminderListComponent);
+    fixture = TestBed.createComponent(VideoNewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

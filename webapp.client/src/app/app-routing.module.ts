@@ -1,17 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReminderEditComponent } from './components/reminder-edit/reminder-edit.component';
-import { ReminderListComponent } from './components/reminder-list/reminder-list.component';
+import { VideoListComponent } from './components/video-list/video-list.component';
+import { VideoViewComponent } from './components/video-view/video-view.component';
+import { VideoNewComponent } from './components/video-new/video-new.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ReminderListComponent,
+    pathMatch: 'full',
+    redirectTo: 'videos',
   },
   {
-    path: 'reminder/:reminderId',
-    component: ReminderEditComponent,
-  }
+    path: 'videos',
+    component: VideoListComponent
+  },
+  {
+    path: 'videos/new',
+    pathMatch: 'full',
+    component: VideoNewComponent
+  },
+  {
+    path: 'videos/:videoId',
+    component: VideoViewComponent
+  },
 ];
 
 @NgModule({

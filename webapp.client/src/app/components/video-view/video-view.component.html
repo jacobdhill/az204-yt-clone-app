@@ -1,0 +1,58 @@
+<ng-container *ngIf="video$ | async as video">
+  <div class="mt-4">
+    <p-breadcrumb [model]="items"></p-breadcrumb>
+  </div>
+
+  <h1 class="my-4">{{ video.title }}</h1>
+
+  <div class="row">
+    <div class="col-xxl-8">
+      <div class="video-container d-flex justify-content-center align-items-center">
+        <video *ngIf="video.sourceUrl else placeholder" [src]="video.sourceUrl" controls class="video w-100"
+          autoplay="true"></video>
+      </div>
+      <ng-template #placeholder>
+        <div class="video placeholder p-2 justify-content-center d-flex flex-column align-items-center">
+          <div class="mb-4">
+            <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+          </div>
+          <span class="mt-4">We are still processing your video... Please check back again shortly</span>
+        </div>
+      </ng-template>
+      <div class="border px-4 my-4 py-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="fw-bold">Description</span>
+          <div class="d-flex gap-2">
+            <p-tag *ngFor="let tag of video.tags" [value]="tag"></p-tag>
+          </div>
+        </div>
+        <span style="white-space: pre-line" class="my-4">{{ video.description }}</span>
+        <p class="mb-0"><small>{{ video.createdDateUtc | date }}</small></p>
+      </div>
+    </div>
+    <div class="col-xxl-4">
+      <div class="row">
+        <div *ngFor="let video of videos$ | async" class="mb-4 col-lg-6 col-xxl-12">
+          <p-card>
+            <div class="d-flex gap-4 video-card-content">
+              <div class="thumbnail-container d-flex justify-content-center align-items-center">
+                <img *ngIf="video.thumbnailUrl" class="thumbnail" [src]="video.thumbnailUrl" />
+              </div>
+              <div>
+                <p class="fw-bold mt-0">
+                  <a [routerLink]="['/videos', video.id]">
+                    {{ video.title }}
+                  </a>
+                </p>
+                <p>
+                  {{ video.description }}
+                </p>
+              </div>
+            </div>
+          </p-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-container>

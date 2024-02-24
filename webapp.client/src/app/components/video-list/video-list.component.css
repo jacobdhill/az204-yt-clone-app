@@ -1,0 +1,17 @@
+.thumbnail {
+  height: 90px;
+}
+
+.thumbnail.placeholder {
+  background-color: #ddd;
+  color: #999;
+}
+
+.thumbnail-container {
+  width: 160px;
+}
+
+.thumbnail-container {
+  aspect-ratio: 16/9;
+  background-color: black;
+}
