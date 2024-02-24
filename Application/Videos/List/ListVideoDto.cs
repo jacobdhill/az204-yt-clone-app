@@ -2,25 +2,25 @@
 using System;
 using System.Collections.Generic;
 
-namespace Application.Videos.Read;
+namespace Application.Videos.List;
 
-public class ReadVideoDto
+public class ListVideoDto
 {
     public Guid Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public List<string> Tags { get; set; }
-    public string SourceUrl { get; set; }
+    public string ThumbnailUrl { get; set; }
 
-    public static ReadVideoDto Create(Video video)
+    public static ListVideoDto Create(Video video)
     {
-        return new ReadVideoDto()
+        return new ListVideoDto()
         {
             Id = video.Id,
             Title = video.Title,
             Description = video.Description,
             Tags = video.Tags,
-            SourceUrl = video.SourceUrl
+            ThumbnailUrl = video.ThumbnailUrl
         };
     }
 }

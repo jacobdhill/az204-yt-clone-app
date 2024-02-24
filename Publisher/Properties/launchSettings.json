@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "Function": {
+    "Publisher": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7008",
+      "commandLineArgs": "--port 7150",
       "launchBrowser": false
     }
   }

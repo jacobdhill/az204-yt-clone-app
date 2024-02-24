@@ -1,13 +1,13 @@
-using Application;
 using Azure.Identity;
 using Infrastructure;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Processor;
 using System;
 
-[assembly: FunctionsStartup(typeof(Function.Startup))]
+[assembly: FunctionsStartup(typeof(Startup))]
 
-namespace Function;
+namespace Processor;
 
 public class Startup : FunctionsStartup
 {
@@ -24,7 +24,6 @@ public class Startup : FunctionsStartup
     {
         var context = builder.GetContext();
 
-        builder.Services.AddApplication(context.Configuration);
         builder.Services.AddInfrastructure(context.Configuration);
     }
 }

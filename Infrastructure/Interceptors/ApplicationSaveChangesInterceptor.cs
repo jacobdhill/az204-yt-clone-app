@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Infrastructure.Notifications;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json;
 using System.Linq;
@@ -9,11 +10,18 @@ namespace Infrastructure.Interceptors;
 
 public class ApplicationSaveChangesInterceptor : SaveChangesInterceptor
 {
-    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+    private readonly NotificationService _notificationService;
+
+    public ApplicationSaveChangesInterceptor(NotificationService notificationService)
+    {
+        _notificationService = notificationService;
+    }
+
+    public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
     {
         if (eventData.Context == null)
         {
-            return base.SavingChangesAsync(eventData, result, cancellationToken);
+            return await base.SavingChangesAsync(eventData, result, cancellationToken);
         }
 
         var domainEvents = eventData.Context.ChangeTracker
@@ -25,10 +33,8 @@ public class ApplicationSaveChangesInterceptor : SaveChangesInterceptor
             }))
             .ToList();
 
-        //
-        // TODO: Handle Domain Events
-        //
+        await _notificationService.SendMessagesAsync(domainEvents);
 
-        return base.SavingChangesAsync(eventData, result, cancellationToken);
+        return await base.SavingChangesAsync(eventData, result, cancellationToken);
     }
 }

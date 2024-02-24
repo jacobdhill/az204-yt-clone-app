@@ -4,7 +4,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Videos.Get;
+namespace Application.Videos.Read;
 
 public class ReadVideoQueryHandler : IRequestHandler<ReadVideoQuery, ReadVideoDto>
 {

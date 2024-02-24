@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System;
 
-namespace Application.Videos.Get;
+namespace Application.Videos.Read;
 
 public class ReadVideoQuery : IRequest<ReadVideoDto>
 {
