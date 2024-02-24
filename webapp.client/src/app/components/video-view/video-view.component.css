@@ -7,10 +7,12 @@
 
 .thumbnail-container {
   width: 160px;
+  height: 90px;
 }
 
 .thumbnail {
-  height: 90px;
+  max-width: 160px;
+  max-height: 90px;
 }
 
 .video {
