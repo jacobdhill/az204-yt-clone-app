@@ -43,7 +43,7 @@ public class VideoController : Controller
     }
 
     [HttpGet("{videoId:guid}")]
-    public async Task<IResult> Get(Guid videoId)
+    public async Task<IResult> Read(Guid videoId)
     {
         try
         {

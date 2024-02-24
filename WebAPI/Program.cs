@@ -41,6 +41,9 @@ builder.Services
 builder.Services
     .AddControllers();
 
+builder.Services
+    .AddMemoryCache();
+
 var app = builder.Build();
 
 app.UseDefaultFiles();

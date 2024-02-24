@@ -1,4 +1,5 @@
-﻿using Infrastructure.Contexts;
+﻿using Infrastructure.Cache;
+using Infrastructure.Contexts;
 using Infrastructure.Interceptors;
 using Infrastructure.Notifications;
 using Infrastructure.Search;
@@ -16,6 +17,7 @@ public static class DependencyInjection
         services.AddSingleton<NotificationService>();
         services.AddSingleton<StorageService>();
         services.AddSingleton<SearchService>();
+        services.AddSingleton<CacheService>();
 
         services.AddDbContext<ApplicationDbContext>((provider, options) =>
         {

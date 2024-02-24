@@ -1,4 +1,5 @@
 ﻿using Domain.Videos;
+using Infrastructure.Cache;
 using Infrastructure.Contexts;
 using Infrastructure.Storage;
 using MediatR;
@@ -13,11 +14,16 @@ public class CreateVideoCommandHandler : IRequestHandler<CreateVideoCommand, Gui
 {
     private readonly StorageService _storageService;
     private readonly ApplicationDbContext _dbContext;
+    private readonly CacheService _cache;
 
-    public CreateVideoCommandHandler(ApplicationDbContext dbContext, StorageService storageService)
+    public CreateVideoCommandHandler(
+        ApplicationDbContext dbContext,
+        StorageService storageService,
+        CacheService cache)
     {
         _dbContext = dbContext;
         _storageService = storageService;
+        _cache = cache;
     }
 
     public async Task<Guid> Handle(CreateVideoCommand request, CancellationToken cancellationToken)
@@ -60,6 +66,8 @@ public class CreateVideoCommandHandler : IRequestHandler<CreateVideoCommand, Gui
             await _storageService.RemoveFileFromStorageAsync(fileName, cancellationToken);
             throw;
         }
+
+        _cache.Remove(CacheKeys.Videos.List());
 
         return video.Id;
     }

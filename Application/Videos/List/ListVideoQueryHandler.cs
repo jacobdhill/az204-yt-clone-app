@@ -1,7 +1,8 @@
-﻿using Domain.Videos;
-using Infrastructure.Search;
+﻿using Infrastructure.Cache;
+using Infrastructure.Contexts;
 using MediatR;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -11,26 +12,24 @@ namespace Application.Videos.List;
 
 public class ListVideoQueryHandler : IRequestHandler<ListVideoQuery, List<ListVideoDto>>
 {
-    private readonly IConfiguration _configuration;
-    private readonly SearchService _searchService;
+    private readonly ApplicationDbContext _dbContext;
+    private readonly CacheService _cache;
 
-    public ListVideoQueryHandler(IConfiguration configuration, SearchService searchService)
+    public ListVideoQueryHandler(ApplicationDbContext dbContext, CacheService cache)
     {
-        _configuration = configuration;
-        _searchService = searchService;
+        _dbContext = dbContext;
+        _cache = cache;
     }
 
     public async Task<List<ListVideoDto>> Handle(ListVideoQuery request, CancellationToken cancellationToken)
     {
-        var videos = await _searchService.SearchAsync<Video>(
-            _configuration.GetSection("SearchService:VideosIndexName").Get<string>(),
-            request.SearchText,
-            cancellationToken);
+        var videos = await _cache.GetOrSetAsync(
+            CacheKeys.Videos.List(),
+            () => _dbContext.Videos
+                .Select(video => ListVideoDto.Create(video))
+                .ToListAsync(cancellationToken),
+            TimeSpan.FromSeconds(30));
 
-        var videoDtos = videos
-            .Select(video => ListVideoDto.Create(video))
-            .ToList();
-
-        return videoDtos;
+        return videos;
     }
 }
