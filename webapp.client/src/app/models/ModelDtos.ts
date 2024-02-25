@@ -1,4 +1,4 @@
-export interface VideoReadDto {
+export interface ReadVideoDto {
   id: string;
   title: string;
   description: string;
@@ -7,10 +7,17 @@ export interface VideoReadDto {
   createdDateUtc: Date;
 }
 
-export interface VideoListDto {
+export interface ListVideoDto {
   id: string;
   title: string;
   description: string;
   tags: string[];
   thumbnailUrl: string;
+}
+
+export interface ListCommentDto {
+  id: string;
+  message: string;
+  likeCount: number;
+  createdDateUtc: Date;
 }

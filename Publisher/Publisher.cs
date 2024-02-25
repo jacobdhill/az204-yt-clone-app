@@ -70,8 +70,15 @@ public class Publisher
             };
             video.DomainEvents.Add(videoPublishedEvent);
 
-            video.SourceUrl = videoBlobClient.Uri.AbsoluteUri;
-            video.ThumbnailUrl = thumbnailBlobClient.Uri.AbsoluteUri;
+            var baseStorageAddressCDN = _configuration
+                .GetSection("BlobStorage:BaseAddressCDN")
+                .Get<string>();
+
+            var sourceFileUri = new Uri(baseStorageAddressCDN + videoBlobClient.Uri.AbsolutePath);
+            video.SourceUrl = sourceFileUri.AbsoluteUri;
+
+            var sourceThumbnailUri = new Uri(baseStorageAddressCDN + thumbnailBlobClient.Uri.AbsolutePath);
+            video.ThumbnailUrl = sourceThumbnailUri.AbsoluteUri;
 
             await _context.SaveChangesAsync(cancellationToken);
 

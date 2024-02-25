@@ -1,6 +1,6 @@
 .thumbnail {
-  max-width: 160px;
-  max-height: 90px;
+  max-width: 100px;
+  max-height: 56.25px;
 }
 
 .thumbnail.placeholder {
@@ -9,7 +9,8 @@
 }
 
 .thumbnail-container {
-  width: 160px;
+  width: 100px;
+  height: 56.25px;
 }
 
 .thumbnail-container {

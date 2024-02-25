@@ -1,4 +1,5 @@
-﻿using Domain.Videos;
+﻿using Domain.Comments;
+using Domain.Videos;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contexts;
@@ -19,4 +20,5 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Video> Videos { get; set; }
+    public DbSet<Comment> Comments { get; set; }
 }

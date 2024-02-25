@@ -32,9 +32,11 @@ public class ListVideoDto
             Id = video.Id,
             Title = video.Title,
             Description = description,
-            Tags = video.Tags,
             ThumbnailUrl = video.ThumbnailUrl,
-            CreatedDateUtc = video.CreatedDateUtc
+            CreatedDateUtc = video.CreatedDateUtc,
+            Tags = video.Tags
+                .OrderBy(tag => tag)
+                .ToList()
         };
     }
 }

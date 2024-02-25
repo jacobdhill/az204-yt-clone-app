@@ -1,6 +1,7 @@
 ﻿using Domain.Videos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Application.Videos.Read;
 
@@ -20,9 +21,11 @@ public class ReadVideoDto
             Id = video.Id,
             Title = video.Title,
             Description = video.Description,
-            Tags = video.Tags,
             SourceUrl = video.SourceUrl,
-            CreatedDateUtc = video.CreatedDateUtc
+            CreatedDateUtc = video.CreatedDateUtc,
+            Tags = video.Tags
+                .OrderBy(tag => tag)
+                .ToList()
         };
     }
 }

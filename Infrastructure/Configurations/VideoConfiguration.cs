@@ -16,9 +16,8 @@ public class VideoConfiguration : IEntityTypeConfiguration<Video>
             .HasPartitionKey(v => v.Id);
 
         builder
-            .Property(m => m.Id)
-            .ToJsonProperty("id")
-            .ValueGeneratedOnAdd();
+            .Property(v => v.Id)
+            .ToJsonProperty("id");
 
         builder
             .HasQueryFilter(v => v.IsDeleted == false);

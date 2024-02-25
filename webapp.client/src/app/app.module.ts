@@ -20,6 +20,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TagModule } from 'primeng/tag';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { SidebarModule } from 'primeng/sidebar';
+import { AvatarModule } from 'primeng/avatar';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SidebarModule } from 'primeng/sidebar';
     InputTextareaModule,
     TagModule,
     ProgressSpinnerModule,
-    SidebarModule
+    SidebarModule,
+    AvatarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
